@@ -55,11 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func scheduleNotification(notificationType: String) {
             
         let content = UNMutableNotificationContent()
+        let userAction = "User Action"
         
         content.title = notificationType
         content.body = "This is example how to create " + notificationType
         content.sound = UNNotificationSound.default
         content.badge = 1
+        content.categoryIdentifier = userAction
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
@@ -73,6 +75,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Error \(error.localizedDescription)")
             }
         }
+        
+        let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
+        let deleleAction = UNNotificationAction(identifier: "Delete", title: "Delete", options: [.destructive])
+        
+        let category = UNNotificationCategory(
+            identifier: userAction,
+            actions: [snoozeAction, deleleAction],
+            intentIdentifiers: [],
+            options: []
+        )
+        
+        notificationCenter.setNotificationCategories([category])
     }
 }
 
@@ -84,6 +98,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if response.notification.request.identifier == "Local Notification"{
             print("Handling notification with the local notification identifire")
+        }
+        
+        switch response.actionIdentifier {
+        case UNNotificationDismissActionIdentifier:
+            print("Dismiss action")
+        case UNNotificationDefaultActionIdentifier:
+            print("default")
+        case "Snooze":
+            print("Snooze")
+            scheduleNotification(notificationType: "Reminder")
+        case "Delete":
+            print("Delete")
+        default:
+            print("Unknown")
         }
         
         completionHandler()
