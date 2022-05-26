@@ -8,15 +8,21 @@
 
 
 import UIKit
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    let notificationCentre = UNUserNotificationCenter.current()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        requestAuthorization()
+        
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     // MARK: UISceneSession Lifecycle
@@ -32,7 +38,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func requestAuthorization() {
+        notificationCentre.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            print("Permition granted: \(granted)")
+            
+            guard granted else { return }
+            
+            self.getNotificationSettings()
+        }
+    }
+    
+    func getNotificationSettings() {
+        notificationCentre.getNotificationSettings { settings in
+            print("Notification settings: \(settings)")
+        }
+    }
 
-
+    func scheduleNotification(notificationType: String) {
+        let content = UNMutableNotificationContent()
+        
+        content.title = notificationType
+        content.body = "This is example how to create " + notificationType
+        content.sound = UNNotificationSound.default
+        content.badge = 1
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let identifire = "Local Notification"
+        
+        let request = UNNotificationRequest(identifier: identifire, content: content, trigger: trigger)
+        
+        notificationCentre.add(request) { error in
+            print(error?.localizedDescription)
+        }
+    }
 }
 
