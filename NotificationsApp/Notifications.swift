@@ -39,6 +39,18 @@ class Notifications: NSObject, UNUserNotificationCenterDelegate {
         content.badge = 1
         content.categoryIdentifier = userAction
         
+        guard let path = Bundle.main.path(forResource: "Photo", ofType: "png") else { return }
+
+        let url = URL(fileURLWithPath: path)
+
+        do {
+            let attachment = try UNNotificationAttachment(identifier: "Photo", url: url, options: nil)
+
+            content.attachments = [attachment]
+        } catch {
+            print("Attachment cannot be loaded!")
+        }
+        
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
         let identifire = "Local Notification"
