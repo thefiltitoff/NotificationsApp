@@ -13,12 +13,12 @@ import UserNotifications
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    let notificationCenter = UNUserNotificationCenter.current()
+    let notifications = Notifications()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        requestAuthorization()
+        notifications.requestAuthorization()
         
-        notificationCenter.delegate = self
+        notifications.notificationCenter.delegate = notifications
         return true
     }
 
@@ -37,83 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    func requestAuthorization() {
-        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            print("Permission granted: \(granted)")
-                
-            guard granted else { return }
-            self.getNotificationSettings()
-        }
-    }
-        
-    func getNotificationSettings() {
-        notificationCenter.getNotificationSettings { (settings) in
-            print("Notification settings: \(settings)")
-        }
-    }
-
-    func scheduleNotification(notificationType: String) {
-            
-        let content = UNMutableNotificationContent()
-        let userAction = "User Action"
-        
-        content.title = notificationType
-        content.body = "This is example how to create " + notificationType
-        content.sound = UNNotificationSound.default
-        content.badge = 1
-        content.categoryIdentifier = userAction
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        let identifire = "Local Notification"
-        let request = UNNotificationRequest(identifier: identifire,
-                                            content: content,
-                                            trigger: trigger)
-        
-        notificationCenter.add(request) { (error) in
-            if let error = error {
-                print("Error \(error.localizedDescription)")
-            }
-        }
-        
-        let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
-        let deleleAction = UNNotificationAction(identifier: "Delete", title: "Delete", options: [.destructive])
-        
-        let category = UNNotificationCategory(
-            identifier: userAction,
-            actions: [snoozeAction, deleleAction],
-            intentIdentifiers: [],
-            options: []
-        )
-        
-        notificationCenter.setNotificationCategories([category])
-    }
-}
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.sound, .banner])
-    }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if response.notification.request.identifier == "Local Notification"{
-            print("Handling notification with the local notification identifire")
-        }
-        
-        switch response.actionIdentifier {
-        case UNNotificationDismissActionIdentifier:
-            print("Dismiss action")
-        case UNNotificationDefaultActionIdentifier:
-            print("default")
-        case "Snooze":
-            print("Snooze")
-            scheduleNotification(notificationType: "Reminder")
-        case "Delete":
-            print("Delete")
-        default:
-            print("Unknown")
-        }
-        
-        completionHandler()
-    }
 }
+
