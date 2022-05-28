@@ -60,17 +60,57 @@
 		2B1DF5D1283F832100CE7512 /* NotificationsApp */ = {
 			isa = PBXGroup;
 			children = (
-				2B1DF5D2283F832100CE7512 /* AppDelegate.swift */,
-				2B1DF5D4283F832100CE7512 /* SceneDelegate.swift */,
-				2B1DF5D6283F832100CE7512 /* TableViewController.swift */,
-				2B1DF5D8283F832100CE7512 /* Main.storyboard */,
-				2B1DF5EA283FD07800CE7512 /* Photo.png */,
-				2B1DF5DB283F832200CE7512 /* Assets.xcassets */,
-				2B1DF5DD283F832200CE7512 /* LaunchScreen.storyboard */,
-				2B1DF5E0283F832200CE7512 /* Info.plist */,
-				2B1DF5E6283FC31800CE7512 /* Notifications.swift */,
+				2BD982FE284255DC0070CD51 /* App */,
+				2BD983012842562C0070CD51 /* ViewControllers */,
+				2BD982FF284256060070CD51 /* Storyboards */,
+				2BD98300284256220070CD51 /* Resources */,
+				2BD982FD284255CA0070CD51 /* Notifications */,
 			);
 			path = NotificationsApp;
+			sourceTree = "<group>";
+		};
+		2BD982FD284255CA0070CD51 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				2B1DF5E6283FC31800CE7512 /* Notifications.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		2BD982FE284255DC0070CD51 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2B1DF5D2283F832100CE7512 /* AppDelegate.swift */,
+				2B1DF5D4283F832100CE7512 /* SceneDelegate.swift */,
+				2B1DF5E0283F832200CE7512 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2BD982FF284256060070CD51 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2B1DF5D8283F832100CE7512 /* Main.storyboard */,
+				2B1DF5DD283F832200CE7512 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		2BD98300284256220070CD51 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2B1DF5DB283F832200CE7512 /* Assets.xcassets */,
+				2B1DF5EA283FD07800CE7512 /* Photo.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2BD983012842562C0070CD51 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B1DF5D6283F832100CE7512 /* TableViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,7 +337,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RB3BCBLCA6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NotificationsApp/Info.plist;
+				INFOPLIST_FILE = NotificationsApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -326,7 +366,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RB3BCBLCA6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NotificationsApp/Info.plist;
+				INFOPLIST_FILE = NotificationsApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
