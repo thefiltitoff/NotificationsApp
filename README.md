@@ -3,6 +3,15 @@
 Project for training with Apple notifications with some actions. This time application work with local notifications. <br/>
 Soon I'm going to add Push Notifications and tahn interate it to my another projects, but this time I've not Apple Developer license 😓
 
+<div align="center">
+  
+  [![iOS](https://img.shields.io/badge/iOS-15.5-blue)](https://www.apple.com/ru/ios/ios-15/)
+  [![Swift](https://img.shields.io/badge/Swift-5.5-orange)](https://developer.apple.com/documentation/swift)
+  [![UIKit](https://img.shields.io/badge/UIKit-%20LTS-yellowgreen)](https://developer.apple.com/documentation/uikit)
+  
+</div>
+
+
 ## Screenshots
 
 <div align="center">
