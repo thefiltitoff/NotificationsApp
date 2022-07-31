@@ -1,7 +1,7 @@
 # Notifications
 
 Project for training with Apple notifications with some actions. This time application work with local notifications. <br/>
-Soon I'm going to add Push, but this time I've not Apple Developer license 😓
+Soon I'm going to add Push Notifications and tahn interate it to my another projects, but this time I've not Apple Developer license 😓
 
 ## Screenshots
 
